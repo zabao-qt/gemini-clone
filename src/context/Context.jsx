@@ -17,6 +17,11 @@ const ContextProvider = (props) => {
         }, 20*index)
     }
 
+    const newChat = () => {
+        setLoading(false)
+        setShowResult(false)
+    }
+
     const parseMarkdown = (text) => {
         // Handle block code (``` ... ```)
         text = text.replace(/```([\s\S]*?)```/g, (match, p1) => {
@@ -49,9 +54,17 @@ const ContextProvider = (props) => {
         setResultData('') // Remove the previous result
         setLoading(true)
         setShowResult(true)
-        setRecentPrompt(input)
-        setPrevPrompts(prev=>[...prev, input])
-        const response = await run(input) // Call the Gemini API here
+
+        let response;
+        if (prompt !== undefined) {
+            response = await run(prompt); // Call the Gemini API
+            setRecentPrompt(prompt)
+        } else {
+            setPrevPrompts(prev=>[...prev, input])
+            setRecentPrompt(input)
+            response = await run(input); // Call the Gemini API
+        }
+
         // let responseArray = response.split("**")
         // let newResponse = '';
         // for (let i = 0; i < responseArray.length; i++) {
@@ -85,7 +98,8 @@ const ContextProvider = (props) => {
         loading,
         resultData,
         input,
-        setInput
+        setInput,
+        newChat
     }
 
     return (
