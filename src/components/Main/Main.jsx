@@ -4,10 +4,12 @@ import { assets } from '../../assets/assets'
 import { Context } from '../../context/Context'
 
 const Main = () => {
-    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input} = useContext(Context);
+    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input, randomizedPrompts} = useContext(Context);
     const handleCardClick = (text) => {
         setInput(text);
     };
+
+    
 
   return (
     <div className='main'>
@@ -25,20 +27,20 @@ const Main = () => {
             </div>
 
             <div className="cards">
-                <div className="card" onClick={() => handleCardClick("Suggest beautiful places to see on an upcoming road trip")}>
-                    <p>Suggest beautiful places to see on an upcoming road trip</p>
+                <div className="card" onClick={() => handleCardClick(randomizedPrompts.compass)}>
+                    <p>{randomizedPrompts.compass}</p>
                     <img src={assets.compass_icon} alt="Compass Icon" />
                 </div>
-                <div className="card" onClick={() => handleCardClick("Briefly summarize this concept: CI/CD")}>
-                    <p>Briefly summarize this concept: CI/CD</p>
+                <div className="card" onClick={() => handleCardClick(randomizedPrompts.bulb)}>
+                    <p>{randomizedPrompts.bulb}</p>
                     <img src={assets.bulb_icon} alt="Bulb Icon" />
                 </div>
-                <div className="card" onClick={() => handleCardClick("Brainstorm team bonding activities for our work retreat")}>
-                    <p>Brainstorm team bonding activities for our work retreat</p>
+                <div className="card" onClick={() => handleCardClick(randomizedPrompts.message)}>
+                    <p>{randomizedPrompts.message}</p>
                     <img src={assets.message_icon} alt="Message Icon" />
                 </div>
-                <div className="card" onClick={() => handleCardClick("Improve the readability of the following code")}>
-                    <p>Improve the readability of the following code</p>
+                <div className="card" onClick={() => handleCardClick(randomizedPrompts.code)}>
+                    <p>{randomizedPrompts.code}</p>
                     <img src={assets.code_icon} alt="Code Icon" />
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import run from "../config/gemini";
 
 export const Context = createContext();
@@ -10,6 +10,62 @@ const ContextProvider = (props) => {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resultData, setResultData] = useState('');
+
+    
+    const compassPrompts = [
+        "Suggest beautiful places to see on an upcoming road trip",
+        "Help me get organized with a list of 10 tips",
+        "Create a few tips on how I can grow my YouTube Channel",
+        "Help me compare these college majors",
+        "Create a travel itinerary for a city"
+    ];
+
+    const bulbPrompts = [
+        "Briefly summarize this concept: CI/CD",
+        "Act like Mowgli from The Jungle Book and answer questions",
+        "What are tips to improve public speaking skills",
+        "Road trip drive time and kid entertainment ideas",
+        "Outline an organized & logical sales pitch for a new product",
+        "I’m sick and need help crafting a text message for my boss"
+    ];
+
+    const codePrompts = [
+        "Improve the readability of the following code",
+        "Look up a Linux shell command for a specific task",
+        "Write code for a specific task, including edge cases",
+        "Suggest a Python library to solve a problem"
+    ];
+
+    const messagePrompts = [
+        "Brainstorm team bonding activities for our work retreat",
+        "Provide questions to help me prepare for an interview",
+        "Come up with a complex word riddle, including hints"
+    ];
+
+    const [randomizedPrompts, setRandomizedPrompts] = useState({
+        compass: "",
+        bulb: "",
+        code: "",
+        message: ""
+    });
+
+    
+    const randomizePrompts = () => {
+        const getRandomPrompt = (prompts) => prompts[Math.floor(Math.random() * prompts.length)];
+        
+        setRandomizedPrompts({
+            compass: getRandomPrompt(compassPrompts),
+            bulb: getRandomPrompt(bulbPrompts),
+            code: getRandomPrompt(codePrompts),
+            message: getRandomPrompt(messagePrompts)
+        });
+    };
+
+    useEffect(() => {
+        randomizePrompts();
+    }, []);
+
+
 
     const delayPara = (index, nextWord) => {
         setTimeout(function () {
@@ -99,6 +155,7 @@ const ContextProvider = (props) => {
         resultData,
         input,
         setInput,
+        randomizedPrompts,
         newChat
     }
 
