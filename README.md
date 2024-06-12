@@ -4,10 +4,10 @@ Built with React (Vite) and integrated with the Gemini API. This project aims to
 
 ## Screenshots
 
-![Screenshot 1](/screenshots/front-page.jpg)
+![Screenshot 1](/screenshots/front-page.JPG)
 *Main Interface of Gemini Clone.*
 
-![Screenshot 2](screenshots/front-page-msg.jpg)
+![Screenshot 2](screenshots/front-page-msg.JPG)
 *Prompt and Output.*
 
 
