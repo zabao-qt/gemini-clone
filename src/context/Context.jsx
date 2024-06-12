@@ -12,38 +12,65 @@ const ContextProvider = (props) => {
     const [resultData, setResultData] = useState('');
 
     const delayPara = (index, nextWord) => {
-
+        setTimeout(function () {
+            setResultData(prev=>prev+nextWord);
+        }, 20*index)
     }
+
+    const parseMarkdown = (text) => {
+        // Handle block code (``` ... ```)
+        text = text.replace(/```([\s\S]*?)```/g, (match, p1) => {
+            const code = p1.trim();
+            return `<pre><code>${code}</code></pre>`;
+        });
+
+        // Handle inline code (` ... `)
+        text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+        // Handle headers (##)
+        text = text.replace(/## (.*?)(\n|$)/g, '<h2>$1</h2>$2');
+
+        // Handle bold text (** ... **)
+        text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+        // Handle lists (* item)
+        text = text.replace(/^\* (.*?)(\n|$)/gm, '<li>$1</li>');
+
+        // Wrap <li> elements with <ul>
+        text = text.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+
+        // Handle line breaks (\n)
+        text = text.replace(/\n/g, '<br>');
+
+        return text;
+    };
 
     const onSent = async (prompt) => {
         setResultData('') // Remove the previous result
         setLoading(true)
         setShowResult(true)
         setRecentPrompt(input)
+        setPrevPrompts(prev=>[...prev, input])
         const response = await run(input) // Call the Gemini API here
-        let responseArray = response.split("**")
-        let newResponse = '';
-        for (let i = 0; i < responseArray.length; i++) {
-            if (i == 0 || i % 2 == 0) {
-                newResponse += responseArray[i];
-            } else {
-                newResponse += "<b>" + responseArray[i] + "</b>";
-            }
-        }
-        let newResponse2 = newResponse.split("*").join("<br>")
-        // let codeArray = newResponse2.split("`")
-        // let finalResponse = '';
-        // for (let i = 0; i < codeArray.length; i++) {
+        // let responseArray = response.split("**")
+        // let newResponse = '';
+        // for (let i = 0; i < responseArray.length; i++) {
         //     if (i == 0 || i % 2 == 0) {
-        //         finalResponse += codeArray[i];
+        //         newResponse += responseArray[i];
         //     } else {
-        //         finalResponse += "<code>" + codeArray[i] + "</code>";
+        //         newResponse += "<b>" + responseArray[i] + "</b>";
         //     }
         // }
-
-        // let finalResponse2 = finalResponse.split("```").join("</pre>");
-        setResultData(newResponse2)
-        console.log(newResponse2)
+        // let newResponse2 = newResponse.split("*").join("<br>")
+        let newResponse2 = parseMarkdown(response)
+        
+        // Typing effect
+        let newResponseArray = newResponse2.split(" ");
+        for (let i = 0; i < newResponseArray.length; i++) {
+            const nextWord = newResponseArray[i];
+            delayPara(i, nextWord + " ");
+        }
+        console.log(newResponse2) // For debugging
         setLoading(false)
         setInput('')
     }
