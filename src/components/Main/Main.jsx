@@ -49,7 +49,11 @@ const Main = () => {
                     <p>{recentPrompt}</p>
                 </div>
                 <div className="result-data">
-                    <img src={assets.gemini_icon} alt="" />
+                    {loading ? 
+                        <img src={assets.gemini_icon_spin} alt="Loading..." className="spin" />
+                        :
+                        <img src={assets.gemini_icon} alt="Gemini Icon" />
+                    }
                     {loading ? 
                     <div className='loader'>
                         <hr />
