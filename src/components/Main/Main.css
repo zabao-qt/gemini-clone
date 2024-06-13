@@ -14,6 +14,10 @@
     color: #585858;
 }
 
+body.dark-theme .main .nav{
+    color: #bdc1c6;
+}
+
 .main .nav img{
     width: 40px;
     border-radius: 50%;
@@ -30,6 +34,10 @@
     color: #c4c7c5;
     font-weight: 500;
     padding: 20px;
+}
+
+body.dark-theme .main .greet{
+    color: #444746;
 }
 
 .main .greet span{
@@ -54,6 +62,10 @@
     cursor: pointer;
 }
 
+body.dark-theme .main .card{
+    background-color: #1e1f20;
+}
+
 .main .card img{
     width: 35px;
     padding: 5px;
@@ -63,14 +75,23 @@
     bottom: 10px;
     right: 10px;
 }
+body.dark-theme .main .card img{
+    filter: invert(95%);
+}
 
 .main .card p{
     color: #585858;
     font-size: 17px;
 }
+body.dark-theme .main .card p{
+    color: #f5f5f5;
+}
 
 .main .card:hover{
     background-color: #dfe4ea;
+}
+body.dark-theme .main .card:hover{
+    background-color: #393b3d;
 }
 
 .main-bottom{
@@ -92,9 +113,16 @@
     border-radius: 50px;
 }
 
+body.dark-theme .search-box{
+    background-color: #1e1f20;
+}
+
 .search-box img{
     width: 24px;
     cursor: pointer;
+}
+body.dark-theme .search-box img{
+    filter: invert(100%);
 }
 
 .search-box input{
@@ -104,6 +132,10 @@
     outline: none;
     padding: 8px;
     font-size: 18px;
+}
+
+body.dark-theme .search-box input{
+    color: #bdc1c6;
 }
 
 .search-box div{
@@ -160,9 +192,14 @@
     background-color: #f6f7f8;
     background: linear-gradient(to right, #9ed7ff, #ffffff, #9ed7ff);
     background-size: 800px 50px;
-    height: 20px;
-    animation: loader 3s infinite linear;
+    height: 15px;
 }
+body.dark-theme .loader hr{
+    background: linear-gradient(to right, #5a3bff, #1e1e1e, #5a3bff);
+}
+.loader hr:nth-child(1) {animation: loader 2s infinite linear;}
+.loader hr:nth-child(2) {animation: loader 3s infinite linear;}
+.loader hr:nth-child(3) {animation: loader 4s infinite linear;}
 
 @keyframes loader{
     0%{
@@ -177,6 +214,10 @@
     font-size: 17px;
     font-weight: 300;
     line-height: 1.8;
+}
+
+body.dark-theme .result-data p{
+    color: #e3e3e3;
 }
 
 @keyframes spin {

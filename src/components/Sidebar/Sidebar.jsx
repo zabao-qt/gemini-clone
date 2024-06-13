@@ -7,6 +7,7 @@ const Sidebar = () => {
 
   const [extended, setExtended] = useState(false)
   const [showSettings, setShowSettings] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const {onSent, prevPrompts, setRecentPrompt, newChat} = useContext(Context)
 
   const loadPrompt = async (prompt) => {
@@ -16,6 +17,11 @@ const Sidebar = () => {
 
   const toggleSettings = () => {
     setShowSettings((prev) => !prev);
+  };
+
+  const toggleDarkTheme = () => {
+    setIsDarkTheme((prev) => !prev);
+    document.body.classList.toggle("dark-theme", !isDarkTheme);
   };
 
   return (
@@ -54,11 +60,11 @@ const Sidebar = () => {
         </div>
         {showSettings && extended ? (
           <div className="settings-popup">
-            <div className="setting-option">
+            <div className="setting-option" onClick={toggleDarkTheme}>
               <img src={assets.moon_icon} alt="Moon Icon" className="moon-icon" />
               <p>Dark Theme</p>
               <label className="switch">
-                <input type="checkbox" />
+                <input type="checkbox" checked={isDarkTheme} onChange={toggleDarkTheme} />
                 <span className="slider round"></span>
               </label>
             </div>
