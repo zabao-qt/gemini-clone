@@ -125,12 +125,15 @@ input:checked + .slider:before {
     position: relative;
     right: -150px;
     top: -80px;
-    bottom: 50px; /* Adjust based on your layout */
     background-color: #f0f4f9;
     border-radius: 5px;
-    padding: 10px 15px;
+    padding: 15px 15px;
     box-shadow: 0 10px 10px rgba(0,0,0,0.2);
     z-index: 100;
+}
+
+.settings-popup:hover{
+    background-color: #e2e6eb;
 }
 
 .setting-option {
