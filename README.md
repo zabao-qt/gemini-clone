@@ -17,5 +17,5 @@ Built with React (Vite) and integrated with the Gemini API. This project aims to
     npm run dev
     ```
 2. Open your browser and go to `http://localhost:5173`.
-Alternative: [Vercel](https://gemini-clone-kappa-seven.vercel.app/)
+* Alternative: [Vercel](https://gemini-clone-kappa-seven.vercel.app/)
 
