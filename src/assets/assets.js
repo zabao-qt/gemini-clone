@@ -15,6 +15,7 @@ import send_icon from './send_icon.png'
 import gemini_icon from './gemini_icon.png'
 import gemini_icon_spin from './gemini_icon_spin.png'
 import user_triet from './user_triet.jpg'
+import moon_icon from './moon_icon.png'
 
 export const assets = {
     history_icon,
@@ -33,5 +34,6 @@ export const assets = {
     send_icon,
     gemini_icon,
     gemini_icon_spin,
-    user_triet
+    user_triet,
+    moon_icon
 }

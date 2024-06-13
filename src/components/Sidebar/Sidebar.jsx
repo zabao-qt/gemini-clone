@@ -6,12 +6,17 @@ import { Context } from '../../context/Context'
 const Sidebar = () => {
 
   const [extended, setExtended] = useState(false)
+  const [showSettings, setShowSettings] = useState(false);
   const {onSent, prevPrompts, setRecentPrompt, newChat} = useContext(Context)
 
   const loadPrompt = async (prompt) => {
     setRecentPrompt(prompt)
     await onSent(prompt)
   }
+
+  const toggleSettings = () => {
+    setShowSettings((prev) => !prev);
+  };
 
   return (
     <div className='sidebar'>
@@ -43,10 +48,22 @@ const Sidebar = () => {
             <img src={assets.history_icon} alt="" />
             {extended ? <p>Activity</p> : null}
         </div>
-        <div className="bottom-item recent-entry">
+        <div className="bottom-item recent-entry" onClick={toggleSettings}>
             <img src={assets.setting_icon} alt="" />
             {extended ? <p>Settings</p> : null}
         </div>
+        {showSettings && extended ? (
+          <div className="settings-popup">
+            <div className="setting-option">
+              <img src={assets.moon_icon} alt="Moon Icon" className="moon-icon" />
+              <p>Dark Theme</p>
+              <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   )
