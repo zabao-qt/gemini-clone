@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import run from "../config/gemini";
+import { marked } from 'marked';
 
 export const Context = createContext();
 
@@ -78,32 +79,36 @@ const ContextProvider = (props) => {
         setShowResult(false)
     }
 
+    // const parseMarkdown = (text) => {
+    //     // Handle block code (``` ... ```)
+    //     text = text.replace(/```([\s\S]*?)```/g, (match, p1) => {
+    //         const code = p1.trim();
+    //         return `<pre><code>${code}</code></pre>`;
+    //     });
+
+    //     // Handle inline code (` ... `)
+    //     text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    //     // Handle headers (##)
+    //     text = text.replace(/## (.*?)(\n|$)/g, '<h2>$1</h2>$2');
+
+    //     // Handle bold text (** ... **)
+    //     text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+    //     // Handle lists (* item)
+    //     text = text.replace(/^\* (.*?)(\n|$)/gm, '<li>$1</li>');
+
+    //     // Wrap <li> elements with <ul>
+    //     text = text.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+
+    //     // Handle line breaks (\n)
+    //     text = text.replace(/\n/g, '<br>');
+
+    //     return text;
+    // };
+
     const parseMarkdown = (text) => {
-        // Handle block code (``` ... ```)
-        text = text.replace(/```([\s\S]*?)```/g, (match, p1) => {
-            const code = p1.trim();
-            return `<pre><code>${code}</code></pre>`;
-        });
-
-        // Handle inline code (` ... `)
-        text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-        // Handle headers (##)
-        text = text.replace(/## (.*?)(\n|$)/g, '<h2>$1</h2>$2');
-
-        // Handle bold text (** ... **)
-        text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-
-        // Handle lists (* item)
-        text = text.replace(/^\* (.*?)(\n|$)/gm, '<li>$1</li>');
-
-        // Wrap <li> elements with <ul>
-        text = text.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
-
-        // Handle line breaks (\n)
-        text = text.replace(/\n/g, '<br>');
-
-        return text;
+        return marked(text);
     };
 
     const onSent = async (prompt) => {
